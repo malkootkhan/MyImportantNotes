@@ -15,7 +15,10 @@ Description: The goal is to store and update here whatever new learning done. wh
 Getstarted to know the linux kernel:
 ====================================
 I got some good knowledge from the link : https://www.youtube.com/watch?v=QatE61Ynwrw
+
 The key points:
+===============
+
 linux test project(LTP):
 ------------------------
 This is a tool for testing the linux kernel it is open-source and its source code is available on github  
