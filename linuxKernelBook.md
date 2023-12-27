@@ -57,15 +57,12 @@ it can also be done in the following way:
 "scripts/faddr2line vmlinux <function name + offset>"
 function+offset=function-name+0x34
 
-GDB(gnu debugger):
-------------------
-gdb debugger can be used to debug the kernel
 
-
+RandomTopicsImportant:
+----------------------
+(these topics should be explored in depth)
 wireshark?
-
 coredump?
-
 virtual memory?
 kdump?
 scripts dir in kernel source?
@@ -95,8 +92,8 @@ Debugging steps:
 - fix the problem
 
 
-KGDB:
-=====
+KGDB for real target:
+=====================
 kgdb is used when target is connected serially to host system; for doing kgdb debugging we have to prepare the following 
 target preparation:
 -------------------
@@ -111,10 +108,33 @@ host preparation:
 - "(gdb) target remote /dev/ttyS0"
 - once connected then gdb cmmands can used to debug
 
+KGDB with qemu:
+===============
+
+prepare qemu target:
+--------------------
+- compile the kernel with debug flag enabled:-> "CONFIG_DEBUG_INFO=y" it can be done either by menuconfig or directly in ".config" file
+- run qemu with "-s -S" the working command in my case is "sudo qemu-system-arm -M virt -kernel "$zImage_path" -initrd ~/qemu/rootfs.cpio -s -S -append "console=ttyS0 nokaslr" -append "root=/dev/ram rdinit=/sbin/init" -nographic". It is according to my current configuration and setup but can be veried for other setup as required
+- after running the above command it will be waiting;
+
+Prepare Host:
+-------------
+- arm-linux-gnueabihf-gdb/gdb vmlinux depending on the architecture(cross compile or same)
+- (gdb) target remote :1234
+
+guidance link: "https://www.youtube.com/watch?v=2VcA5Wj7IvU"
+
+you can explore various gdb commands to step in throguh source code layout or assembly and many more things
+
+
+
+
 
 CREATING PATCH FOR LINUX KERNEL:
 --------------------------------
+here I am interested in contributing to linux kernel main repo but for that I must know how to find where to add modify the code then create a standard patch and standard way to add that patch to the kernel
 
+CompleteGuidance: "https://www.youtube.com/watch?v=LLBrBBImJt4"
 
 
 
@@ -138,7 +158,7 @@ STEP 2 :
 --------
 export  path of the cross compilation toolchain. 
 
-export PATH=$PATH:/home/kiran/BBB_Workspace/Downloads/gcc-linaro-6.3.1-2017.02-x86_64_arm-linux-gnueabihf/bin
+export PATH=$PATH:/home/$USER/BBB_Workspace/Downloads/gcc-linaro-6.3.1-2017.02-x86_64_arm-linux-gnueabihf/bin
 
 
 #*************************U-boot Compilation ***************************************************
@@ -236,7 +256,7 @@ https://buildroot.org/
 
 2) Configure Dropbear
 
-./configure --host=arm-linux-gnueabihf --disable-zlib --prefix=/home/kiran/BBB_Workspace/dropbear CC=arm-linux-gnueabihf-gcc
+./configure --host=arm-linux-gnueabihf --disable-zlib --prefix=/home/$USER/BBB_Workspace/dropbear CC=arm-linux-gnueabihf-gcc
 
 3) compile the Dropbear as static 
 
