@@ -49,6 +49,13 @@ useful commands:(these commands/tools and many more are located within the toolc
 ----------------
 -objdump: it is used to convert the vmlinux to assembly code and may be doing many more thing should be explored
 -addr2line: this is an excellent tool to take the address or the function name with offset and jump to the exact corresponding line in souce code where you can analyze and see for the issue more easily
+example: 
+"arm-linux-gnueabihf-addr2line -f -e vmlinux <address>"
+address=the address of the problem
+running the above command will give us the exact line in the source c code which we can explore more
+it can also be done in the following way:
+"scripts/faddr2line vmlinux <function name + offset>"
+function+offset=function-name+0x34
 
 GDB(gnu debugger):
 ------------------
@@ -88,8 +95,173 @@ Debugging steps:
 - fix the problem
 
 
+KGDB:
+=====
+kgdb is used when target is connected serially to host system; for doing kgdb debugging we have to prepare the following 
+target preparation:
+-------------------
+- enable "CONFIG_KGDB=y" in .config file in main linux dir
+- enable "CONFIG_KGDB_SERIAL_CONSOLE=y"
+- boot the kernel with kgdb enabled; adjust the desired serial port. This typically involves adding something like kgdboc=ttyS0,115200 kgdbwait to your kernel command line. Adjust ttyS0 and 115200
+host preparation:
+-----------------
+- install gdb (also confirm wether host and target are of same architecture or cross if cross: arm-linux-gnueabihf- etc but pi is arm and the target is also arm I think the same)
+- connect to the target serially and confirm to see the kernel log
+- "gdb path/to/vmlinux"
+- "(gdb) target remote /dev/ttyS0"
+- once connected then gdb cmmands can used to debug
 
 
+CREATING PATCH FOR LINUX KERNEL:
+--------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+CROSS COMPILATION OF LINUX KERNEL:
+==================================
+
+#*************************cross tool-chain installation and settings for linux host******************
+
+STEP 1 :
+--------
+Download arm cross toolchain for your Host machine
+STEP 2 :
+--------
+export  path of the cross compilation toolchain. 
+
+export PATH=$PATH:/home/kiran/BBB_Workspace/Downloads/gcc-linaro-6.3.1-2017.02-x86_64_arm-linux-gnueabihf/bin
+
+
+#*************************U-boot Compilation ***************************************************
+
+
+STEP 1: 
+-------
+distclean : deletes all the previously compiled/generated object files. 
+
+make CROSS_COMPILE=arm-linux-gnueabihf- distclean
+
+STEP 2 : 
+--------
+apply board default configuration for uboot
+
+make CROSS_COMPILE=arm-linux-gnueabihf- am335x_boneblack_defconfig
+
+
+STEP 3 : 
+--------
+run menuconfig, if you want to do any settings other than default configuration . 
+
+make CROSS_COMPILE=arm-linux-gnueabihf-  menuconfig
+
+
+STEP 4 :
+--------
+compile 
+
+make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- -j4  // -j4(4 core machine) will instruct the make tool to spawn 4 threads
+make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- -j8  // -j8(8 core machine) will instruct the make tool to spawn 8 threads
+
+
+#************************* linux compilation ***************************************************
+STEP 1:
+-------
+ make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- distclean
+
+STEP 2:
+-------
+ make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- bb.org_defconfig (4.4)
+for 4.11 use omap2plus_defconfig
+
+STEP 3:
+-------
+ make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- menuconfig
+
+STEP 4:
+-------
+ make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- uImage dtbs LOADADDR=0x80008000 -j4
+
+STEP 5:
+-------
+ make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- -j4 modules
+
+STEP 6:
+-------
+ make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- INSTALL_MOD_PATH=<path of the RFS> modules_install
+
+
+#************************* Busy box compilation ***************************************************
+
+STEP 1:
+-------
+download busybox 
+
+STEP 2 : 
+--------
+Apply default configuration
+make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- defconfig
+
+STEP 3 : 
+--------
+change default settings if you want 
+make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- menuconfig
+
+STEP 4 :
+--------
+generate the busy box binary and minimal file system 
+make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- CONFIG_PREFIX=<install_path> install
+
+
+
+#*********************************build-root compilation ***********************************
+1) download the build root package from 
+
+https://buildroot.org/
+
+2) configure the build root 
+
+
+#*******************************Dropbear compilation*************************************
+
+1) Download Dropbear 
+
+2) Configure Dropbear
+
+./configure --host=arm-linux-gnueabihf --disable-zlib --prefix=/home/kiran/BBB_Workspace/dropbear CC=arm-linux-gnueabihf-gcc
+
+3) compile the Dropbear as static 
+
+make PROGRAMS="dropbear dropbearkey dbclient scp" STATIC=1
+
+4) install dropbear generated binaries 
+make PROGRAMS="dropbear dropbearkey dbclient scp" install
+
+
+5) generate RSA and DSS keys 
+dropbearkey -t dss -f dropbear_dss_host_key
+dropbearkey -t rsa -f dropbear_rsa_host_key
+
+6) run the dropbear 
+# dropbear
+
+7) make a SSh connection from pc 
+ssh -l root 192.168.7.2
+
+
+
+
+
+# use this command to install an openssh server on your ubuntu host 
+sudo apt-get install openssh-server
 
 
 
