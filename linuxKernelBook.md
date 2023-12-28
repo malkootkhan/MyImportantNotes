@@ -148,7 +148,7 @@ Steps for creating patch:
 - go into the git dir create your own branch and checkout to it
 - run "./scripts/checkpatch.pl <dir>" it will check for any issue in specific area <dir> for exampel: "./scripts/checkpatch.pl net/ipv4/" so it will catch any error or warning in net/ipv4/
 - go to that error or warning and correct it then again running "./script/checkpatch.pl net/ipv4/" to verify if it disappears
-- Optional but you can also build using "make M=<modifiedfile or dir>" to see it it build successfully
+- Optional but you can also build using "make M= < modifiedfile or dir >" to see it it build successfully
 - git add <modified file>
 - git commit -s -v: running this command will open an editor write the title and the description according to other people done in the same file you can find that by running "git log <same file>" or "git log --pretty=full" or "git log --pretty=online <pathTofile>" follow that same approach
 - git format-patch master..<currentbranch> or for one patch  "git format-patch -1"
