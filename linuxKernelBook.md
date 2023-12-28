@@ -31,7 +31,7 @@ It is another test suit and part of kernel
 
 static analysis:
 ----------------
-tools->checkpatch: this needs to be explored it is used to check the patch I think it is available in the kernel source scripts dir; this scripts dir has a lot of important tools and should be explored in depth
+tools- >checkpatch: this needs to be explored it is used to check the patch I think it is available in the kernel source scripts dir; this scripts dir has a lot of important tools and should be explored in depth
 
 dynamic analysis:
 -----------------
@@ -55,11 +55,11 @@ useful commands:(these commands/tools and many more are located within the toolc
 -objdump: it is used to convert the vmlinux to assembly code and may be doing many more thing should be explored
 -addr2line: this is an excellent tool to take the address or the function name with offset and jump to the exact corresponding line in souce code where you can analyze and see for the issue more easily
 example: 
-"arm-linux-gnueabihf-addr2line -f -e vmlinux <address>"
+"arm-linux-gnueabihf-addr2line -f -e vmlinux < address >"
 address=the address of the problem
 running the above command will give us the exact line in the source c code which we can explore more
 it can also be done in the following way:
-"scripts/faddr2line vmlinux <function name + offset>"
+"scripts/faddr2line vmlinux < function name + offset >"
 function+offset=function-name+0x34
 
 
@@ -78,16 +78,16 @@ QEMU RELATED STUFFS:
 --------------------
 Follow the following steps to run qemu
 "sudo qemu-system-arm -M virt -kernel "$zImage_path" -initrd ~/qemu/rootfs.cpio -append "root=/dev/ram rdinit=/sbin/init" -no-reboot -nographic"
-<in the above command the machine is virtual .cpio is root filesystem required and currently located at that specific loc>
-<The defconfig file for this is "vexpress_defconfig" located at "arch/arm/config/vexpress_defconfig">
+< in the above command the machine is virtual .cpio is root filesystem required and currently located at that specific loc >
+< The defconfig file for this is "vexpress_defconfig" located at "arch/arm/config/vexpress_defconfig" >
 GDB:if we want to run gdb on kernel then run the following commands
 "sudo qemu-system-arm -M virt -kernel "$zImage_path" -initrd ~/qemu/rootfs.cpio -s -S -append "console=ttyS0 nokaslr" -append "root=/dev/ram rdinit=/sbin/init" -nographic"
 but the debug flag should be enabled as explained earlier
 
 running this gdb command in one terminal and in another terminal we have run "arm-linux-gnueabihf-gdb vmlinux" then "target remote :1234" and then some commands to boot in debug mode and explore
-gdb debugging guide:-> "https://www.youtube.com/watch?v=bxKMW9wtAH0"
-qemu based gdb debugging guide:-> "https://www.youtube.com/watch?v=FdNIiQxwJuk"
-qemu based debug:-> "https://www.youtube.com/watch?v=2VcA5Wj7IvU"
+gdb debugging guide:- > "https://www.youtube.com/watch?v=bxKMW9wtAH0"
+qemu based gdb debugging guide:- > "https://www.youtube.com/watch?v=FdNIiQxwJuk"
+qemu based debug:- > "https://www.youtube.com/watch?v=2VcA5Wj7IvU"
 
 Debugging steps:
 ----------------
@@ -118,7 +118,7 @@ KGDB with qemu:
 
 prepare qemu target:
 --------------------
-- compile the kernel with debug flag enabled:-> "CONFIG_DEBUG_INFO=y" it can be done either by menuconfig or directly in ".config" file
+- compile the kernel with debug flag enabled:- > "CONFIG_DEBUG_INFO=y" it can be done either by menuconfig or directly in ".config" file
 - run qemu with "-s -S" the working command in my case is "sudo qemu-system-arm -M virt -kernel "$zImage_path" -initrd ~/qemu/rootfs.cpio -s -S -append "console=ttyS0 nokaslr" -append "root=/dev/ram rdinit=/sbin/init" -nographic". It is according to my current configuration and setup but can be veried for other setup as required
 - after running the above command it will be waiting;
 
@@ -146,20 +146,20 @@ Steps for creating patch:
 -------------------------
 - clone the kernel form "git clone git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git"
 - go into the git dir create your own branch and checkout to it
-- run "./scripts/checkpatch.pl <dir>" it will check for any issue in specific area <dir> for exampel: "./scripts/checkpatch.pl net/ipv4/" so it will catch any error or warning in net/ipv4/
+- run "./scripts/checkpatch.pl < dir >" it will check for any issue in specific area < dir > for exampel: "./scripts/checkpatch.pl net/ipv4/" so it will catch any error or warning in net/ipv4/
 - go to that error or warning and correct it then again running "./script/checkpatch.pl net/ipv4/" to verify if it disappears
-- Optional but you can also build using "make M= < modifiedfile or dir >" to see it it build successfully
-- git add <modified file>
-- git commit -s -v: running this command will open an editor write the title and the description according to other people done in the same file you can find that by running "git log <same file>" or "git log --pretty=full" or "git log --pretty=online <pathTofile>" follow that same approach
-- git format-patch master..<currentbranch> or for one patch  "git format-patch -1"
-- now check the patch "./scripts/checkpatch.pl <patch>" where patch=0001-tcp-fixed-whitespace-trailing-error.patch
-- find the maintainer email by "./scripts/get_maintainer.pl <patch>" where patch=0001-tcp-fixed-whitespace-trailing-error.patch 
-- before sending patch you have to do some more configurations first "~/.gitConfig" set username,user email, smtpuser, smtpserver,smtpencryption etc then go to gmail manageAccount->security->2steps auth->create app passwordand keep it safe that is the password will be used when using 'git send-patch' command
-- Just to follow the next steps we first send the patch to ourself if everything is ok then go for next steps "git send-email <patch>" press enter it will ask for email enter your own email then check
-- send email "git send-email --to <personEmailAddr> --cc <maintainer_1_email> --cc <maintainer_2_email> --cc <and so on> <patch>" check and press enter if everything is ok it may be multiple times 
-- the above command can also be executed as "git send-email --cc-cmd='./scripts/get_maintainer.pl --norolestats <patch>' --cc <your email address> <patch>"
+- Optional but you can also build using "make M= <  modifiedfile or dir  >" to see it it build successfully
+- git add < modified file >
+- git commit -s -v: running this command will open an editor write the title and the description according to other people done in the same file you can find that by running "git log < same file >" or "git log --pretty=full" or "git log --pretty=online < pathTofile >" follow that same approach
+- git format-patch master..< currentbranch > or for one patch  "git format-patch -1"
+- now check the patch "./scripts/checkpatch.pl < patch >" where patch=0001-tcp-fixed-whitespace-trailing-error.patch
+- find the maintainer email by "./scripts/get_maintainer.pl < patch >" where patch=0001-tcp-fixed-whitespace-trailing-error.patch 
+- before sending patch you have to do some more configurations first "~/.gitConfig" set username,user email, smtpuser, smtpserver,smtpencryption etc then go to gmail manageAccount- >security- >2steps auth- >create app passwordand keep it safe that is the password will be used when using 'git send-patch' command
+- Just to follow the next steps we first send the patch to ourself if everything is ok then go for next steps "git send-email < patch >" press enter it will ask for email enter your own email then check
+- send email "git send-email --to < personEmailAddr > --cc < maintainer_1_email > --cc < maintainer_2_email > --cc < and so on > < patch >" check and press enter if everything is ok it may be multiple times 
+- the above command can also be executed as "git send-email --cc-cmd='./scripts/get_maintainer.pl --norolestats < patch >' --cc < your email address > < patch >"
 - on successful submission, verify the patch at link "https://lore.kernel.org/"
-- before sending patch you have to do some more configurations first "~/.gitConfig" set username,user email, smtpuser, smtpserver,smtpencryption etc then go to gmail manageAccount->security->2steps auth->create app passwordand keep it safe that is the password will be used when using 'git send-patch' command
+- before sending patch you have to do some more configurations first "~/.gitConfig" set username,user email, smtpuser, smtpserver,smtpencryption etc then go to gmail manageAccount- >security- >2steps auth- >create app passwordand keep it safe that is the password will be used when using 'git send-patch' command
 - git send-patch
 -
 Note: you can also locate the requirements of work to be done in kernel by "linux$ find . -iname "TODO""
@@ -242,7 +242,7 @@ STEP 5:
 
 STEP 6:
 -------
- make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- INSTALL_MOD_PATH=<path of the RFS> modules_install
+ make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- INSTALL_MOD_PATH=< path of the RFS > modules_install
 
 
 #************************* Busy box compilation ***************************************************
@@ -264,7 +264,7 @@ make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- menuconfig
 STEP 4 :
 --------
 generate the busy box binary and minimal file system 
-make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- CONFIG_PREFIX=<install_path> install
+make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- CONFIG_PREFIX=< install_path > install
 
 
 
