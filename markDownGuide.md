@@ -61,6 +61,19 @@ return 0;
 
 ```
 
+To insert the link write square bracket and round bracket : specify the title in [] and link in round bracket
+[title](link) such as shown below
+
+[git](https://github.com/malkootkhan/MyImportantNotes/blob/master/markDownGuide.md)
+
+
+in same way to display picture 
+![tiltle](picture dir) such as shown
+
+![vi/vim cheatsheet](./Cheatsheet_Vim_with_'programming_Dvorak'_layout.png)
+
+
+
 
 
 
