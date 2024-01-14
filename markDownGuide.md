@@ -70,10 +70,23 @@ To insert the link write square bracket and round bracket : specify the title in
 in same way to display picture 
 ![tiltle](picture dir) such as shown
 
-![vi/vim cheatsheet](./Cheatsheet_Vim_with_'programming_Dvorak'_layout.png)
+<!-- ![vi/vim cheatsheet](./Cheatsheet_Vim_with_'programming_Dvorak'_layout.png) -->
 
 
+to comment something you have to write within <!-- write comment here --> so use it on picture above
 
 
+imoji
+
+:Joy:
+
+to subscript and superscript
+H~2~O
+
+to create table
+
+|serial no|description|
+|--|--|
+|title|heading|
 
 
