@@ -1,6 +1,6 @@
-#PRACTICAL KEY POINTS TO WORK WITH LINUX KERNEL DEVELOPMENT , DEBUGGING AND MANY MORE:
+# PRACTICAL KEY POINTS TO WORK WITH LINUX KERNEL DEVELOPMENT , DEBUGGING AND MANY MORE:
 
-##NOTE:
+## NOTE:
 
 ---
 This is the main documents I am creating and keep maitaining it in future whatever important knowledge I find. further more it is available and on git for easy access and daily modifications push to git
@@ -22,7 +22,7 @@ Description: The goal is to store and update here whatever new learning done. wh
 
 ---
 
-###linux test project(LTP):
+### linux test project(LTP):
 
 This is a tool for testing the linux kernel it is open-source and its source code is available on github  
 This is an important tool to use for testing after whatever changes made to the kernel but I think mostly used by the kernel maintainers
