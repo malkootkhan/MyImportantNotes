@@ -61,7 +61,7 @@ running the above command will give us the exact line in the source c code which
 it can also be done in the following way:
 "scripts/faddr2line vmlinux < function name + offset >"
 function+offset=function-name+0x34
-
+-we can also target the in this way: run gdb ./vmlinux then in gdb "list *(functionName+offset or address)" it will take me to the line in source code that created the problem
 
 RandomTopicsImportant:
 ----------------------
@@ -150,7 +150,7 @@ Steps for creating patch:
 - go to that error or warning and correct it then again running "./script/checkpatch.pl net/ipv4/" to verify if it disappears
 - Optional but you can also build using "make M= <  modifiedfile or dir  >" to see it it build successfully
 - git add < modified file >
-- git commit -s -v: running this command will open an editor write the title and the description according to other people done in the same file you can find that by running "git log < same file >" or "git log --pretty=full" or "git log --pretty=online < pathTofile >" follow that same approach
+- git commit -s -v: running this command will open an editor write the title and the description according to other people done in the same file you can find that by running "git log < path to the same file >" or "git log --pretty=full" or "git log --pretty=online < pathTofile >" follow that same approach
 - git format-patch master..< currentbranch > or for one patch  "git format-patch -1"
 - now check the patch "./scripts/checkpatch.pl < patch >" where patch=0001-tcp-fixed-whitespace-trailing-error.patch
 - find the maintainer email by "./scripts/get_maintainer.pl < patch >" where patch=0001-tcp-fixed-whitespace-trailing-error.patch 
