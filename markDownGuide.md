@@ -41,9 +41,9 @@ if you want to put a checkbox in start
 
 for shaded checkbox put space in the square bracket instead x
 
-- [  ] line 1
-- [  ] line 2
-- [  ] line 3
+- [] line 1
+- [] line 2
+- [] line 3
 
 
 
