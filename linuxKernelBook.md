@@ -1,4 +1,5 @@
 #PRACTICAL KEY POINTS TO WORK WITH LINUX KERNEL DEVELOPMENT , DEBUGGING AND MANY MORE:
+
 ##NOTE:
 
 ---
@@ -14,39 +15,49 @@ Description: The goal is to store and update here whatever new learning done. wh
 ---
 
 **Getstarted to know the linux kernel:**
+
 - [I got some good knowledge from the link](https://www.youtube.com/watch?v=QatE61Ynwrw)
 
 **The key points:**
 
 ---
+
 ###linux test project(LTP):
+
 This is a tool for testing the linux kernel it is open-source and its source code is available on github  
 This is an important tool to use for testing after whatever changes made to the kernel but I think mostly used by the kernel maintainers
 (It is somehow user level application but should be explored to confirm)
 
 ---
+
 ###Linux Kernel Selftests(kselftests):
+
 It is another test suit and part of kernel
 
 **static analysis:**
+
 tools- >checkpatch: this needs to be explored it is used to check the patch I think it is available in the kernel source scripts dir; this scripts dir has a lot of important tools and should be explored in depth
 
 **dynamic analysis:**
+
 there are some tools that are used to check the memory and memory leaks : scuch as 
 - kmemcheck
 - kmemleak
 
 **config flags:**
+
 this file resides in the main kernel directory as ".config" and contains the various configurations flags. if we want to debug the kernel then first we have to enable debug flag in this file such as 
 CONFIG_GDB_SCRIPTS=y
 
 ---
+
 ###ftrace(function trace):
+
 this is another tool that gives you the function calling tree; should be explored in depth is very important
 
 **dump_stack() prints stack trace:** it is something printing all function in time of crash that can be followed backwards to locate the exact function that caused the current crash but need to be explored
 
-**useful commands:**(these commands/tools and many more are located within the toolchain)
+**useful commands:** (these commands/tools and many more are located within the toolchain)
 
 - **objdump:** it is used to convert the vmlinux to assembly code and may be doing many more thing should be explored
 - **addr2line:**his is an excellent tool to take the address or the function name with offset and jump to the exact corresponding line in souce code where you can analyze and see for the issue more easily
@@ -60,16 +71,18 @@ function+offset=function-name+0x34
 -we can also target the in this way: run gdb ./vmlinux then in gdb "list *(functionName+offset or address)" it will take me to the line in source code that created the problem
 
 ###RandomTopicsImportant:
-(these topics should be explored in depth)
-wireshark?
-coredump?
-virtual memory?
-kdump?
-scripts dir in kernel source?
+
+- (these topics should be explored in depth)
+- wireshark?
+- coredump?
+- virtual memory?
+- kdump?
+- scripts dir in kernel source?
 
 ---
 
 #QEMU RELATED STUFFS:
+
 Follow the following steps to run qemu
 "sudo qemu-system-arm -M virt -kernel "$zImage_path" -initrd ~/qemu/rootfs.cpio -append "root=/dev/ram rdinit=/sbin/init" -no-reboot -nographic"
 > in the above command the machine is virtual .cpio is root filesystem required and currently located at that specific loc 
@@ -86,6 +99,7 @@ running this gdb command in one terminal and in another terminal we have run "ar
 - [qemu based debug](https://www.youtube.com/watch?v=2VcA5Wj7IvU)
 
 #Debugging steps:
+
 - understand the problem
 - reproduce the problem 
 - identify the source of the problem
@@ -94,12 +108,17 @@ running this gdb command in one terminal and in another terminal we have run "ar
 ---
 
 ##KGDB for real target:
+
 kgdb is used when target is connected serially to host system; for doing kgdb debugging we have to prepare the following 
+
 ###target preparation:
+
 - enable "CONFIG_KGDB=y" in .config file in main linux dir
 - enable "CONFIG_KGDB_SERIAL_CONSOLE=y"
 - boot the kernel with kgdb enabled; adjust the desired serial port. This typically involves adding something like kgdboc=ttyS0,115200 kgdbwait to your kernel command line. Adjust ttyS0 and 115200
+
 ###host preparation:
+
 - install gdb (also confirm wether host and target are of same architecture or cross if cross: arm-linux-gnueabihf- etc but pi is arm and the target is also arm I think the same)
 - connect to the target serially and confirm to see the kernel log
 - "gdb path/to/vmlinux"
@@ -107,14 +126,17 @@ kgdb is used when target is connected serially to host system; for doing kgdb de
 - once connected then gdb cmmands can used to debug
 
 ---
+
 #KGDB with qemu:
 
 ##prepare qemu target:
+
 - compile the kernel with debug flag enabled:- > "CONFIG_DEBUG_INFO=y" it can be done either by menuconfig or directly in ".config" file
 - run qemu with "-s -S" the working command in my case is "sudo qemu-system-arm -M virt -kernel "$zImage_path" -initrd ~/qemu/rootfs.cpio -s -S -append "console=ttyS0 nokaslr" -append "root=/dev/ram rdinit=/sbin/init" -nographic". It is according to my current configuration and setup but can be veried for other setup as required
 - after running the above command it will be waiting;
 
 ##Prepare Host:
+
 - arm-linux-gnueabihf-gdb/gdb vmlinux depending on the architecture(cross compile or same)
 - (gdb) target remote :1234
 
@@ -127,6 +149,7 @@ you can explore various gdb commands to step in throguh source code layout or as
 ---
 
 #CREATING PATCH FOR LINUX KERNEL:
+
 here I am interested in contributing to linux kernel main repo but for that I must know how to find where to add modify the code then create a standard patch and standard way to add that patch to the kernel
 
 - [patchGuidance 1](https://www.youtube.com/watch?v=LLBrBBImJt4)
@@ -134,6 +157,7 @@ here I am interested in contributing to linux kernel main repo but for that I mu
 
 
 ##Steps for creating patch:
+
 - clone the kernel form "git clone git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git"
 - go into the git dir create your own branch and checkout to it
 - run "./scripts/checkpatch.pl < dir >" it will check for any issue in specific area < dir > for exampel: "./scripts/checkpatch.pl net/ipv4/" so it will catch any error or warning in net/ipv4/
@@ -153,7 +177,7 @@ here I am interested in contributing to linux kernel main repo but for that I mu
 - before sending patch you have to do some more configurations first "~/.gitConfig" set username,user email, smtpuser, smtpserver,smtpencryption etc then go to gmail manageAccount- >security- >2steps auth- >create app passwordand keep it safe that is the password will be used when using 'git send-patch' command
 - git send-patch
 -
-Note: you can also locate the requirements of work to be done in kernel by "linux$ find . -iname "TODO""
+**Note:** you can also locate the requirements of work to be done in kernel by "linux$ find . -iname "TODO""
 "git blame dir" It will show who wrote each and who review everything we can check it for ours later
 
 
@@ -236,7 +260,9 @@ generate the busy box binary and minimal file system
 make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- CONFIG_PREFIX=< install_path > install
 
 ---
+
 ## build-root compilation
+
 1. download the build root package from 
 - [buildroot](https://buildroot.org/)
 2. configure the build root 
