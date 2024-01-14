@@ -8,9 +8,9 @@ so in short It is the most important docs will be always be updated with any typ
 
 2024 Target: int the mid of 2024 it should have a big knowledge base and contain most of the kernel stuffs that make dealing with kernel easy
 
-started on date: 27/12/2023
-Author: Malkoot Khan
-Description: The goal is to store and update here whatever new learning done. when all the important knowledge and pin-points are available in one place so it will be easier to get start where I left and memorize the things easily if there is a long break in any of the topic so after that much time I can easily pick where left.
+- [x] started on date: 27/12/2023
+- [x] Author: Malkoot Khan
+- [x] Description: The goal is to store and update here whatever new learning done. when all the important knowledge and pin-points are available in one place so it will be easier to get start where I left and memorize the things easily if there is a long break in any of the topic so after that much time I can easily pick where left.
 
 ---
 
