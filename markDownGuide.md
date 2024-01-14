@@ -39,11 +39,27 @@ if you want to put a checkbox in start
 - [x] line 2
 - [x] line 3
 
-for shaded checkbox put space in the square bracket instead x
+for uncheckbox put space in the square bracket instead x
 
 - [ ] line 1
 - [ ] line 2
 - [ ] line 3
+
+To Write code just put two tilt and write the code within these tilt ``
+
+`#include <stido.h>`
+
+or you cat put three and then specify the language and then  write the code as much as you wish
+
+```c
+#include <stdio.h>
+
+int main(){
+	printf("Test code for showing in markdown preview!");
+return 0;
+}
+
+```
 
 
 
