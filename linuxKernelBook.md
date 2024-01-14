@@ -224,27 +224,28 @@ make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- -j8  // -j8(8 core machine) wil
 
 ---
 ## linux compilation
-**STEP 1:**
 ```bash
+#STEP 1:
 make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- distclean
 
-# STEP 2:**
+# STEP 2:
  make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- bb.org_defconfig (4.4)
 for 4.11 use omap2plus_defconfig
 
-# STEP 3:**
+# STEP 3:
  make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- menuconfig
 
- # STEP 4:**
+ # STEP 4:
  make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- uImage dtbs LOADADDR=0x80008000 -j4
 
- # STEP 5:**
+ # STEP 5:
  make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- -j4 modules
 
- # STEP 6:**
+ # STEP 6:
  make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- INSTALL_MOD_PATH=< path of the RFS > modules_install
 ```
 ---
+
 ## Busy box compilation
 
 **STEP 1:**
