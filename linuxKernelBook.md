@@ -62,11 +62,11 @@ this is another tool that gives you the function calling tree; should be explore
 - **objdump:** it is used to convert the vmlinux to assembly code and may be doing many more thing should be explored
 - **addr2line:** his is an excellent tool to take the address or the function name with offset and jump to the exact corresponding line in souce code where you can analyze and see for the issue more easily
 **Example**
-"arm-linux-gnueabihf-addr2line -f -e vmlinux < address >"
+`arm-linux-gnueabihf-addr2line -f -e vmlinux < address >`
 address=the address of the problem
 running the above command will give us the exact line in the source c code which we can explore more
 it can also be done in the following way:
-"scripts/faddr2line vmlinux < function name + offset >"
+`scripts/faddr2line vmlinux < function name + offset >`
 function+offset=function-name+0x34
 -we can also target the in this way: run gdb ./vmlinux then in gdb "list *(functionName+offset or address)" it will take me to the line in source code that created the problem
 
@@ -84,16 +84,16 @@ function+offset=function-name+0x34
 # QEMU RELATED STUFFS:
 
 Follow the following steps to run qemu
-"sudo qemu-system-arm -M virt -kernel "$zImage_path" -initrd ~/qemu/rootfs.cpio -append "root=/dev/ram rdinit=/sbin/init" -no-reboot -nographic"
+`sudo qemu-system-arm -M virt -kernel "$zImage_path" -initrd ~/qemu/rootfs.cpio -append "root=/dev/ram rdinit=/sbin/init" -no-reboot -nographic`
 > in the above command the machine is virtual .cpio is root filesystem required and currently located at that specific loc 
 > The defconfig file for this is "vexpress_defconfig" located at "arch/arm/config/vexpress_defconfig" 
 **GDB:** if we want to run gdb on kernel then run the following commands
-> "sudo qemu-system-arm -M virt -kernel "$zImage_path" -initrd ~/qemu/rootfs.cpio -s -S -append "console=ttyS0 nokaslr" -append "root=/dev/ram rdinit=/sbin/init" -nographic"
+> `sudo qemu-system-arm -M virt -kernel "$zImage_path" -initrd ~/qemu/rootfs.cpio -s -S -append "console=ttyS0 nokaslr" -append "root=/dev/ram rdinit=/sbin/init" -nographic`
 but the debug flag should be enabled as explained earlier
 
 ---
 
-running this gdb command in one terminal and in another terminal we have run "arm-linux-gnueabihf-gdb vmlinux" then "target remote :1234" and then some commands to boot in debug mode and explore
+running this gdb command in one terminal and in another terminal we have run `arm-linux-gnueabihf-gdb vmlinux` then `target remote :1234` and then some commands to boot in debug mode and explore
 - [gdb debugging guide](https://www.youtube.com/watch?v=bxKMW9wtAH0)
 - [qemu based gdb debugging guide](https://www.youtube.com/watch?v=FdNIiQxwJuk)
 - [qemu based debug](https://www.youtube.com/watch?v=2VcA5Wj7IvU)
@@ -132,7 +132,7 @@ kgdb is used when target is connected serially to host system; for doing kgdb de
 ## prepare qemu target:
 
 - compile the kernel with debug flag enabled:- > "CONFIG_DEBUG_INFO=y" it can be done either by menuconfig or directly in ".config" file
-- run qemu with "-s -S" the working command in my case is "sudo qemu-system-arm -M virt -kernel "$zImage_path" -initrd ~/qemu/rootfs.cpio -s -S -append "console=ttyS0 nokaslr" -append "root=/dev/ram rdinit=/sbin/init" -nographic". It is according to my current configuration and setup but can be veried for other setup as required
+- run qemu with "-s -S" the working command in my case is `sudo qemu-system-arm -M virt -kernel "$zImage_path" -initrd ~/qemu/rootfs.cpio -s -S -append "console=ttyS0 nokaslr" -append "root=/dev/ram rdinit=/sbin/init" -nographic`. It is according to my current configuration and setup but can be veried for other setup as required
 - after running the above command it will be waiting;
 
 ## Prepare Host:
@@ -160,9 +160,9 @@ here I am interested in contributing to linux kernel main repo but for that I mu
 
 - clone the kernel form "git clone git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git"
 - go into the git dir create your own branch and checkout to it
-- run "./scripts/checkpatch.pl < dir >" it will check for any issue in specific area < dir > for exampel: "./scripts/checkpatch.pl net/ipv4/" so it will catch any error or warning in net/ipv4/
-- go to that error or warning and correct it then again running "./script/checkpatch.pl net/ipv4/" to verify if it disappears
-- Optional but you can also build using "make M= <  modifiedfile or dir  >" to see it it build successfully
+- run "./scripts/checkpatch.pl < dir >" it will check for any issue in specific area < dir > for exampel: `./scripts/checkpatch.pl net/ipv4/` so it will catch any error or warning in net/ipv4/
+- go to that error or warning and correct it then again running `./script/checkpatch.pl net/ipv4/` to verify if it disappears
+- Optional but you can also build using `make M= <  modifiedfile or dir  >` to see it it build successfully
 - git add < modified file >
 - git commit -s -v: running this command will open an editor write the title and the description according to other people done in the same file you can find that by running "git log < path to the same file >" or "git log --pretty=full" or "git log --pretty=online < pathTofile >" follow that same approach
 - git format-patch master..< currentbranch > or for one patch  "git format-patch -1"
@@ -177,8 +177,9 @@ here I am interested in contributing to linux kernel main repo but for that I mu
 - before sending patch you have to do some more configurations first "~/.gitConfig" set username,user email, smtpuser, smtpserver,smtpencryption etc then go to gmail manageAccount- >security- >2steps auth- >create app passwordand keep it safe that is the password will be used when using 'git send-patch' command
 - git send-patch
 -
-**Note:** you can also locate the requirements of work to be done in kernel by "linux$ find . -iname "TODO""
-"git blame dir" It will show who wrote each and who review everything we can check it for ours later
+**Note:** you can also locate the requirements of work to be done in kernel by `linux$ find . -iname "TODO"`
+
+git blame dir" It will show who wrote each and who review everything we can check it for ours later
 
 
 ---
@@ -190,57 +191,59 @@ here I am interested in contributing to linux kernel main repo but for that I mu
 **STEP 1 :**
 Download arm cross toolchain for your Host machine
 **STEP 2 :**
+```bash
 export  path of the cross compilation toolchain. 
-
 export PATH=$PATH:/home/$USER/BBB_Workspace/Downloads/gcc-linaro-6.3.1-2017.02-x86_64_arm-linux-gnueabihf/bin
-
+```
 ---
 ## U-boot Compilation
 
 **STEP 1:** 
 distclean : deletes all the previously compiled/generated object files. 
 
-make CROSS_COMPILE=arm-linux-gnueabihf- distclean
+`make CROSS_COMPILE=arm-linux-gnueabihf- distclean`
 
 **STEP 2 :**
 apply board default configuration for uboot
 
-make CROSS_COMPILE=arm-linux-gnueabihf- am335x_boneblack_defconfig
+`make CROSS_COMPILE=arm-linux-gnueabihf- am335x_boneblack_defconfig`
 
 
 **STEP 3 :**
 run menuconfig, if you want to do any settings other than default configuration . 
 
-make CROSS_COMPILE=arm-linux-gnueabihf-  menuconfig
+`make CROSS_COMPILE=arm-linux-gnueabihf-  menuconfig`
 
 
 **STEP 4 :**
 compile 
-
+```bash
 make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- -j4  // -j4(4 core machine) will instruct the make tool to spawn 4 threads
 make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- -j8  // -j8(8 core machine) will instruct the make tool to spawn 8 threads
+```
 
 ---
 ## linux compilation
 **STEP 1:**
- make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- distclean
+```bash
+make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- distclean
 
-**STEP 2:**
+# STEP 2:**
  make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- bb.org_defconfig (4.4)
 for 4.11 use omap2plus_defconfig
 
-**STEP 3:**
+# STEP 3:**
  make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- menuconfig
 
-**STEP 4:**
+ # STEP 4:**
  make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- uImage dtbs LOADADDR=0x80008000 -j4
 
-**STEP 5:**
+ # STEP 5:**
  make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- -j4 modules
 
-**STEP 6:**
+ # STEP 6:**
  make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- INSTALL_MOD_PATH=< path of the RFS > modules_install
-
+```
 ---
 ## Busy box compilation
 
@@ -249,15 +252,15 @@ download busybox
 
 **STEP 2 :**
 Apply default configuration
-make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- defconfig
+`make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- defconfig`
 
 **STEP 3 :**
 change default settings if you want 
-make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- menuconfig
+`make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- menuconfig`
 
 **STEP 4 :**
 generate the busy box binary and minimal file system 
-make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- CONFIG_PREFIX=< install_path > install
+`make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- CONFIG_PREFIX=< install_path > install`
 
 ---
 
@@ -272,14 +275,14 @@ make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- CONFIG_PREFIX=< install_path > 
 
 1. Download Dropbear 
 2. Configure Dropbear
-./configure --host=arm-linux-gnueabihf --disable-zlib --prefix=/home/$USER/BBB_Workspace/dropbear CC=arm-linux-gnueabihf-gcc
+`./configure --host=arm-linux-gnueabihf --disable-zlib --prefix=/home/$USER/BBB_Workspace/dropbear CC=arm-linux-gnueabihf-gcc`
 
 3. compile the Dropbear as static 
 
-make PROGRAMS="dropbear dropbearkey dbclient scp" STATIC=1
+`make PROGRAMS="dropbear dropbearkey dbclient scp" STATIC=1`
 
 4. install dropbear generated binaries 
-make PROGRAMS="dropbear dropbearkey dbclient scp" install
+`make PROGRAMS="dropbear dropbearkey dbclient scp" install`
 
 
 5. generate RSA and DSS keys 
@@ -290,14 +293,14 @@ dropbearkey -t rsa -f dropbear_rsa_host_key
  **dropbear**
 
 7. make a SSh connection from pc 
-ssh -l root 192.168.7.2
+`ssh -l root 192.168.7.2`
 
 
 
 
 
 use this command to install an openssh server on your ubuntu host 
-sudo apt-get install openssh-server
+`sudo apt-get install openssh-server`
 
 
 
