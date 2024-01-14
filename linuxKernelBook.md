@@ -6,7 +6,7 @@
 This is the main documents I am creating and keep maitaining it in future whatever important knowledge I find. further more it is available and on git for easy access and daily modifications push to git
 so in short It is the most important docs will be always be updated with any type of linux kernel related knowledge.
 
-2024 Target: int the mid of 2024 it should have a big knowledge base and contain most of the kernel stuffs that make dealing with kernel easy
+- [ ] 2024 Target: int the mid of 2024 it should have a big knowledge base and contain most of the kernel stuffs that make dealing with kernel easy
 
 - [x] started on date: 27/12/2023
 - [x] Author: Malkoot Khan
