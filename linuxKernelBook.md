@@ -30,7 +30,7 @@ This is an important tool to use for testing after whatever changes made to the 
 
 ---
 
-###Linux Kernel Selftests(kselftests):
+### Linux Kernel Selftests(kselftests):
 
 It is another test suit and part of kernel
 
@@ -51,7 +51,7 @@ CONFIG_GDB_SCRIPTS=y
 
 ---
 
-###ftrace(function trace):
+### ftrace(function trace):
 
 this is another tool that gives you the function calling tree; should be explored in depth is very important
 
@@ -70,7 +70,7 @@ it can also be done in the following way:
 function+offset=function-name+0x34
 -we can also target the in this way: run gdb ./vmlinux then in gdb "list *(functionName+offset or address)" it will take me to the line in source code that created the problem
 
-###RandomTopicsImportant:
+### RandomTopicsImportant:
 
 - (these topics should be explored in depth)
 - wireshark?
@@ -81,7 +81,7 @@ function+offset=function-name+0x34
 
 ---
 
-#QEMU RELATED STUFFS:
+# QEMU RELATED STUFFS:
 
 Follow the following steps to run qemu
 "sudo qemu-system-arm -M virt -kernel "$zImage_path" -initrd ~/qemu/rootfs.cpio -append "root=/dev/ram rdinit=/sbin/init" -no-reboot -nographic"
@@ -98,7 +98,7 @@ running this gdb command in one terminal and in another terminal we have run "ar
 - [qemu based gdb debugging guide](https://www.youtube.com/watch?v=FdNIiQxwJuk)
 - [qemu based debug](https://www.youtube.com/watch?v=2VcA5Wj7IvU)
 
-#Debugging steps:
+# Debugging steps:
 
 - understand the problem
 - reproduce the problem 
@@ -107,17 +107,17 @@ running this gdb command in one terminal and in another terminal we have run "ar
 
 ---
 
-##KGDB for real target:
+## KGDB for real target:
 
 kgdb is used when target is connected serially to host system; for doing kgdb debugging we have to prepare the following 
 
-###target preparation:
+### target preparation:
 
 - enable "CONFIG_KGDB=y" in .config file in main linux dir
 - enable "CONFIG_KGDB_SERIAL_CONSOLE=y"
 - boot the kernel with kgdb enabled; adjust the desired serial port. This typically involves adding something like kgdboc=ttyS0,115200 kgdbwait to your kernel command line. Adjust ttyS0 and 115200
 
-###host preparation:
+### host preparation:
 
 - install gdb (also confirm wether host and target are of same architecture or cross if cross: arm-linux-gnueabihf- etc but pi is arm and the target is also arm I think the same)
 - connect to the target serially and confirm to see the kernel log
@@ -127,15 +127,15 @@ kgdb is used when target is connected serially to host system; for doing kgdb de
 
 ---
 
-#KGDB with qemu:
+# KGDB with qemu:
 
-##prepare qemu target:
+## prepare qemu target:
 
 - compile the kernel with debug flag enabled:- > "CONFIG_DEBUG_INFO=y" it can be done either by menuconfig or directly in ".config" file
 - run qemu with "-s -S" the working command in my case is "sudo qemu-system-arm -M virt -kernel "$zImage_path" -initrd ~/qemu/rootfs.cpio -s -S -append "console=ttyS0 nokaslr" -append "root=/dev/ram rdinit=/sbin/init" -nographic". It is according to my current configuration and setup but can be veried for other setup as required
 - after running the above command it will be waiting;
 
-##Prepare Host:
+## Prepare Host:
 
 - arm-linux-gnueabihf-gdb/gdb vmlinux depending on the architecture(cross compile or same)
 - (gdb) target remote :1234
@@ -148,7 +148,7 @@ you can explore various gdb commands to step in throguh source code layout or as
 
 ---
 
-#CREATING PATCH FOR LINUX KERNEL:
+# CREATING PATCH FOR LINUX KERNEL:
 
 here I am interested in contributing to linux kernel main repo but for that I must know how to find where to add modify the code then create a standard patch and standard way to add that patch to the kernel
 
@@ -156,7 +156,7 @@ here I am interested in contributing to linux kernel main repo but for that I mu
 - [patchGuidance 2](https://www.youtube.com/watch?v=FZR9U98D_jY"
 
 
-##Steps for creating patch:
+## Steps for creating patch:
 
 - clone the kernel form "git clone git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git"
 - go into the git dir create your own branch and checkout to it
@@ -183,9 +183,9 @@ here I am interested in contributing to linux kernel main repo but for that I mu
 
 ---
 
-#CROSS COMPILATION OF LINUX KERNEL:
+# CROSS COMPILATION OF LINUX KERNEL:
 
-##cross tool-chain installation and settings for linux host
+## cross tool-chain installation and settings for linux host
 
 **STEP 1 :**
 Download arm cross toolchain for your Host machine
@@ -195,7 +195,7 @@ export  path of the cross compilation toolchain.
 export PATH=$PATH:/home/$USER/BBB_Workspace/Downloads/gcc-linaro-6.3.1-2017.02-x86_64_arm-linux-gnueabihf/bin
 
 ---
-##U-boot Compilation
+## U-boot Compilation
 
 **STEP 1:** 
 distclean : deletes all the previously compiled/generated object files. 
