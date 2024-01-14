@@ -60,7 +60,7 @@ this is another tool that gives you the function calling tree; should be explore
 **useful commands:** (these commands/tools and many more are located within the toolchain)
 
 - **objdump:** it is used to convert the vmlinux to assembly code and may be doing many more thing should be explored
-- **addr2line:**his is an excellent tool to take the address or the function name with offset and jump to the exact corresponding line in souce code where you can analyze and see for the issue more easily
+- **addr2line:** his is an excellent tool to take the address or the function name with offset and jump to the exact corresponding line in souce code where you can analyze and see for the issue more easily
 **Example**
 "arm-linux-gnueabihf-addr2line -f -e vmlinux < address >"
 address=the address of the problem
@@ -87,7 +87,7 @@ Follow the following steps to run qemu
 "sudo qemu-system-arm -M virt -kernel "$zImage_path" -initrd ~/qemu/rootfs.cpio -append "root=/dev/ram rdinit=/sbin/init" -no-reboot -nographic"
 > in the above command the machine is virtual .cpio is root filesystem required and currently located at that specific loc 
 > The defconfig file for this is "vexpress_defconfig" located at "arch/arm/config/vexpress_defconfig" 
-**GDB:**if we want to run gdb on kernel then run the following commands
+**GDB:** if we want to run gdb on kernel then run the following commands
 > "sudo qemu-system-arm -M virt -kernel "$zImage_path" -initrd ~/qemu/rootfs.cpio -s -S -append "console=ttyS0 nokaslr" -append "root=/dev/ram rdinit=/sbin/init" -nographic"
 but the debug flag should be enabled as explained earlier
 
