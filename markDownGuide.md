@@ -11,3 +11,7 @@ the below three dashes produce horizontal line
 
 
 ---
+
+to make any texst bold just use double aestriks on both sides as shown below
+**KHAN**
+
