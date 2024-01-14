@@ -73,14 +73,15 @@ in same way to display picture
 <!-- ![vi/vim cheatsheet](./Cheatsheet_Vim_with_'programming_Dvorak'_layout.png) -->
 
 
-to comment something you have to write within <!-- write comment here --> so use it on picture above
+to comment something you have to write within "<!-- write comment here -->" so use it on picture above
 
 
 imoji
 
-:Joy:
+: Joy:
 
 to subscript and superscript
+
 H~2~O
 
 to create table
