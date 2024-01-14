@@ -161,20 +161,20 @@ you can watch the following tutorials for better understanding of creating patch
 
 ## Steps for creating patch:
 
-- clone the kernel form "git clone git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git"
+- clone the kernel form `git clone git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git`
 - go into the git dir create your own branch and checkout to it
-- run "./scripts/checkpatch.pl < dir >" it will check for any issue in specific area < dir > for exampel: `./scripts/checkpatch.pl net/ipv4/` so it will catch any error or warning in net/ipv4/
+- run `./scripts/checkpatch.pl < dir >` it will check for any issue in specific area < dir > for exampel: `./scripts/checkpatch.pl net/ipv4/` so it will catch any error or warning in net/ipv4/
 - go to that error or warning and correct it then again running `./script/checkpatch.pl net/ipv4/` to verify if it disappears
 - Optional but you can also build using `make M= <  modifiedfile or dir  >` to see it it build successfully
-- git add < modified file >
-- git commit -s -v: running this command will open an editor write the title and the description according to other people done in the same file you can find that by running "git log < path to the same file >" or "git log --pretty=full" or "git log --pretty=online < pathTofile >" follow that same approach
-- git format-patch master..< currentbranch > or for one patch  "git format-patch -1"
-- now check the patch "./scripts/checkpatch.pl < patch >" where patch=0001-tcp-fixed-whitespace-trailing-error.patch
-- find the maintainer email by "./scripts/get_maintainer.pl < patch >" where patch=0001-tcp-fixed-whitespace-trailing-error.patch 
-- before sending patch you have to do some more configurations first "~/.gitConfig" set username,user email, smtpuser, smtpserver,smtpencryption etc then go to gmail manageAccount- >security- >2steps auth- >create app passwordand keep it safe that is the password will be used when using 'git send-patch' command
-- Just to follow the next steps we first send the patch to ourself if everything is ok then go for next steps "git send-email < patch >" press enter it will ask for email enter your own email then check
-- send email "git send-email --to < personEmailAddr > --cc < maintainer_1_email > --cc < maintainer_2_email > --cc < and so on > < patch >" check and press enter if everything is ok it may be multiple times 
-- the above command can also be executed as "git send-email --cc-cmd='./scripts/get_maintainer.pl --norolestats < patch >' --cc < your email address > < patch >"
+- run `git add < modified file >`
+- run `git commit -s -v` : running this command will open an editor write the title and the description according to other people done in the same file you can find that by running `git log < path to the same file >` or `git log --pretty=full` or `git log --pretty=online < pathTofile >` follow that same approach
+- run `git format-patch master..< currentbranch >` or for one patch  `git format-patch -1`
+- now check the patch `./scripts/checkpatch.pl < patch >` where patch=0001-tcp-fixed-whitespace-trailing-error.patch
+- find the maintainer email by `./scripts/get_maintainer.pl < patch >` where patch=0001-tcp-fixed-whitespace-trailing-error.patch 
+- before sending patch you have to do some more configurations first `~/.gitConfig` set username,user email, smtpuser, smtpserver,smtpencryption etc then go to gmail manageAccount- >security- >2steps auth- >create app passwordand keep it safe that is the password will be used when using 'git send-patch' command
+- Just to follow the next steps we first send the patch to ourself if everything is ok then go for next steps `git send-email < patch >` press enter it will ask for email enter your own email then check
+- send email `git send-email --to < personEmailAddr > --cc < maintainer_1_email > --cc < maintainer_2_email > --cc < and so on > < patch >` check and press enter if everything is ok it may be multiple times 
+- the above command can also be executed as `git send-email --cc-cmd='./scripts/get_maintainer.pl --norolestats < patch >' --cc < your email address > < patch >`
 - on successful submission, verify the patch at 
 - [link](https://lore.kernel.org/)
 - before sending patch you have to do some more configurations first "~/.gitConfig" set username,user email, smtpuser, smtpserver,smtpencryption etc then go to gmail manageAccount- >security- >2steps auth- >create app passwordand keep it safe that is the password will be used when using 'git send-patch' command
