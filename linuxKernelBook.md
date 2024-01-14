@@ -153,8 +153,9 @@ you can explore various gdb commands to step in throguh source code layout or as
 here I am interested in contributing to linux kernel main repo but for that I must know how to find where to add modify the code then create a standard patch and standard way to add that patch to the kernel
 
 you can watch the following tutorials for better understanding of creating patches
+
 ![youtube](https://www.youtube.com/watch?v=LLBrBBImJt4)
-![youtube](https://www.youtube.com/watch?v=FZR9U98D_jY"
+![youtube](https://www.youtube.com/watch?v=FZR9U98D_jY)
 
 
 ## Steps for creating patch:
