@@ -35,14 +35,15 @@ if you want to put dot sign in the start of line just put - in start
 
 if you want to put a checkbox in start 
 
--[x] line 1
--[x] line 2
+- [x] line 1
+- [x] line 2
+- [x] line 3
 
 for shaded checkbox put space in the square bracket instead x
 
--[  ] line 1
--[  ] line 2
--[  ] line 3
+- [  ] line 1
+- [  ] line 2
+- [  ] line 3
 
 
 
