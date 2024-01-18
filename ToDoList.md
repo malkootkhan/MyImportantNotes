@@ -1,4 +1,3 @@
 ## dmesg Exploration in depth:
-> specifically demsg -n 8 the console log level
-> qemu gdb connection and make working in woring laptop
-> 
+- specifically demsg -n 8 the console log level
+- qemu gdb connection and make working in woring laptop 
