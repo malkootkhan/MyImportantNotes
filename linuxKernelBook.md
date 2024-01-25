@@ -184,9 +184,10 @@ you can watch the following tutorials for better understanding of creating patch
 
 git blame dir" It will show who wrote each and who review everything we can check it for ours later
 
-
 ---
-
+## Linux study findings:
+- task_struct is the most important structure for holding almost everything related to processes: its object is also called 'process descriptor'
+- 
 # CROSS COMPILATION OF LINUX KERNEL:
 
 ## cross tool-chain installation and settings for linux host
