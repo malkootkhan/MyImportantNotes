@@ -186,8 +186,12 @@ git blame dir" It will show who wrote each and who review everything we can chec
 
 ---
 ## Linux study findings:
-- task_struct is the most important structure for holding almost everything related to processes: its object is also called 'process descriptor'
-- 
+- **task_struct** is the most important structure for holding almost everything related to processes: its object is also called 'process descriptor' or process descriptor means instance of task_struct
+- **PID** The concurrent processes that can run and that is repesented by short int 32768 and can be increased to max 4 millions specified '/proc/sys/kernel/pid_max' file:
+- init is the parent process for all other process init process is called by boot process init process has PID:1
+- every process has exactly one parent and zero or more children. the children having same parent are called siblings
+- all the process info exist in task_struct descriptor or instance it has a member called parent hold the parent id and a list of children
+-  
 # CROSS COMPILATION OF LINUX KERNEL:
 
 ## cross tool-chain installation and settings for linux host
