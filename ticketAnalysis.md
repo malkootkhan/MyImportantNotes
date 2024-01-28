@@ -1,0 +1,12 @@
+# Issue Analysis > Raise possible questions
+1. pick the issue and isolate the problem (Raise possible questions)
+2. explore the very basic resource, verify and gether more info there (Raise possible questions)
+3. go for sec, third and so on resources and explore the same issue there and relate them with the firs one (Raise possible questions)
+4. go for very different and little related resources and explore them (Raise possible questions)
+5. go for other possible resources and relate the info obtained (Raise possible questions)
+6 -patch relation (Raise possible questions)
+7 -source code[BSP,yocto hash] (Raise possible questions)
+8 -google (Raise possible questions)
+9 -Confluence page (Raise possible questions)
+10 -Testbench (Raise possible questions)
+11 -Simulator (Raise possible questions)

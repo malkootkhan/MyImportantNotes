@@ -191,7 +191,7 @@ git blame dir" It will show who wrote each and who review everything we can chec
 - init is the parent process for all other process init process is called by boot process init process has PID:1
 - every process has exactly one parent and zero or more children. the children having same parent are called siblings
 - all the process info exist in task_struct descriptor or instance it has a member called parent hold the parent id and a list of children
--  
+- modinfo/objdump KernelModule.ko : will give you information related to the module  
 # CROSS COMPILATION OF LINUX KERNEL:
 
 ## cross tool-chain installation and settings for linux host
