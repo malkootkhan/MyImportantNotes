@@ -192,6 +192,30 @@ git blame dir" It will show who wrote each and who review everything we can chec
 - every process has exactly one parent and zero or more children. the children having same parent are called siblings
 - all the process info exist in task_struct descriptor or instance it has a member called parent hold the parent id and a list of children
 - modinfo/objdump KernelModule.ko : will give you information related to the module  
+
+
+
+
+# Intree kernel moduledevelopment
+1. create a directory anywhere in linux kernel source code base
+2. write your module let suppose, main.c
+3. create Kconfig: this file add your module to kernel config menu where you can select or deselect before building the kernel
+**Basic syntax**
+```
+menu "my custom module"
+	config CUSTOM_HELLOWORLD
+		tristate "hello world module support"
+		default m
+endmenu
+```
+where m,n,y are three states can be set for module y means statically load or already added and m mean load on run time and n means not add
+default m means when you open the menuconfig gui it will selected is dynamic loadable module but for it will selected as part kernel and n mean it will not be selected so if you want you have to select
+4. add the local level Kconfig to the upper level Kconfig file
+5. create a local Makefile
+6. add `obj-<CONFIG_ITEM>+=<module>.o`
+7. add the local level Makefile to upper level Makefile
+**NOTE:**linux kernel has Kbuild system in my case I created the directory in main linux dir where I have to add my directory to the upper Kbuild which resolved the issue
+
 # CROSS COMPILATION OF LINUX KERNEL:
 
 ## cross tool-chain installation and settings for linux host
