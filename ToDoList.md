@@ -25,7 +25,7 @@ The following modules will be covered during the class:
 - More on Printk()
 - creating /proc files
 - The sys file system
- - [ ]debugfs
+ - [ ] debugfs
 - cscope
 - kernel crashes —the “oops” message
 - KDB and KGDB
