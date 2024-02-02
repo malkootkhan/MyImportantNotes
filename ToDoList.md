@@ -1,5 +1,4 @@
 # Main Linux topics to be studied each:
-The following modules will be covered during the class:
 
 ## Linux Kernel Overview
 - Diagram of Linux subsystems
