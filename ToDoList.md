@@ -3,7 +3,7 @@
 ---
 ## Linux Kernel Overview
 ### Linux Subsystem Diagram
-![Linux subsystems](./linux-subsystem)
+![Linux subsystems](./linux-subsystem.png)
 
 ---
 ### Role of the kernel
