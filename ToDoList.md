@@ -147,50 +147,83 @@ Virtual memory is used on software side and give separate spaces for each proces
 
 ![virtual memory](./virtualMemory.png)
 
-- Paging
-- kmalloc() and friends
-- Slab Allocator
-- get_free_page() and friends
-- Buddy Algorithm
-## Device Drivers
-- What is a Device Driver?
-- The /dev directory
-- Device Registration
-- [ ] The File Operations Table
-- Unified Device Model
- 
+### TLB in virtual memory
+The Translation Lookaside Buffer (TLB) is a special cache used by the CPU to speed up the translation of virtual memory addresses to physical memory addresses. When the operating system uses virtual memory, it needs a way to keep track of which virtual addresses correspond to which physical locations in RAM. This mapping is typically stored in a data structure called a **page table**.
 
-## Interrupt Context
-- interrupt handlers
-- [ ] Registering an Interrupt Handler
-- Deferred work
+However, looking up addresses in the page table can be slow because it may involve reading from memory, which is much slower than accessing the CPU's cache. The TLB comes into play to make this faster. It keeps a small number of recent translations from the page table, so if the CPU needs to translate the same address again, it can quickly check the TLB instead of going through the entire page table.
 
-- [ ] Tasklets
-- [ ] Workqueues
-- Timers
-## Virtual Filesystem/Block Devices
-- VFS data structures
-- Adding a filesystem
-- The Block Layer
-- [ ] I/O Schedulers
-- Block devices
-## Configuring and Building the Kernel
-- Why build the kernel?
-- Where to get the Kernel
-- [ ] Upstream and Downstream Kernels
-- Kernel Source Tree
-- Configuring the Kernel
-- Building and Installing the Kernel
-## The Scheduler
-- What does the Scheduler Do?
-- Completely Fair Scheduler
-- [ ] Red/Black Trees
-- High Resolution Timer
-## The Linux Boot Process
-- BIOS
-- Bootloader
-- [ ] Grub
-- Initial RAM Disk
-- Kernel Initialization
-- init process
-- Run Levels
+In the context of the Linux kernel, the TLB is managed by the CPU hardware, but the kernel has to interact with it, especially when it changes the page table. For instance, if the kernel updates or removes an entry in the page table, it needs to tell the CPU to invalidate the old entry in the TLB, so it doesn't use outdated information.
+
+In simple words, the TLB in Linux is like a quick-reference guide for the CPU to **remember recent virtual-to-physical memory address translations**, making memory operations faster.
+
+### Paging
+Paging is a way to manage computer memory by breaking it into small pieces called "pages." It's like having a book and only taking out the pages you need to read at the moment, instead of carrying the whole book all the time.
+
+### kmalloc() and friends
+kmalloc() is a function in the Linux kernel that gives you a chunk of memory to use. It's like asking a librarian for a block of LEGO bricks to build something small quickly.
+
+### Slab Allocator
+The Slab Allocator is a memory management system in the kernel that organizes memory into caches for commonly used objects. It's like having preassembled LEGO sets ready to go for things you build often.
+
+### get_free_page() and friends
+get_free_page() is a function that gives you a whole page of memory. It's like asking the librarian for a whole page from a book rather than a paragraph (kmalloc()).
+
+### Buddy Algorithm
+The Buddy Algorithm is a way to manage memory by keeping track of it in pairs (or "buddies") that can be combined or split. It's like having LEGO plates that can only be combined with plates of the same size.
+
+### Device Drivers
+A Device Driver is software that tells the computer how to communicate with hardware devices. It's like an interpreter helping two people who speak different languages to talk to each other.
+
+### The /dev directory
+The /dev directory is a place in Linux where the system represents devices as files. It's like a directory with contact info for each device so the system knows how to reach them.
+
+### Device Registration
+Device Registration is when you tell the operating system about a new device so it can start using it. It's like telling your phone about a new Bluetooth speaker so it can play music through it.
+
+### The File Operations Table
+The File Operations Table is a list of functions that a device driver can perform, like reading and writing data. It's like a menu of what you can order at a restaurant, but for device commands.
+
+### Unified Device Model
+The Unified Device Model is a standard way of representing all devices in the kernel, making it easier to manage them. It's like having one remote control for all your electronic devices at home.
+
+### Interrupt Context
+Interrupt handlers are special functions that respond to signals from hardware, like when you click a mouse. It's like a reflex action to catch a ball thrown at you without thinking.
+
+### Registering an Interrupt Handler
+Registering an Interrupt Handler is like signing up to be notified when your food is ready at a restaurant; the kitchen will call you when it's time to eat.
+
+### Deferred work
+Deferred work is when the kernel puts off certain tasks to be done later because they're not urgent. It's like taking a note to buy milk the next time you're out because you don't need it right away.
+
+### Tasklets
+Tasklets are small tasks that the kernel can run later when it's less busy. It's like having a sticky note for small reminders that you can attend to between bigger tasks.
+
+### Workqueues
+Workqueues are lists of tasks that the kernel will work on over time. It's like a to-do list for your weekend chores.
+
+### Timers
+Timers are tools the kernel uses to run functions at a specific time. It's like setting an alarm to remind you to take a break.
+
+### Virtual Filesystem/Block Devices
+VFS data structures are ways of organizing all the different filesystems so the kernel can work with them in a standard way. It's like having one app that can read any type of document, whether it's a PDF, Word, or Google Doc.
+
+### Adding a filesystem
+Adding a filesystem is like installing a new app on your phone so you can open files that you couldn't before.
+
+### The Block Layer
+The Block Layer is the part of the kernel that deals with the storage devices like your hard drive. It's like the part of the library that organizes and stores all the books.
+
+### I/O Schedulers
+I/O Schedulers decide in what order the computer will read or write data to the storage devices. It's like the post office deciding in which order to deliver packages.
+
+### Block devices
+Block devices are storage devices like hard drives that organize data into blocks. It's like having a bookshelf where each book must fit into a specific slot.
+
+### Configuring and Building the Kernel
+Why build the kernel? You might want to build the kernel to customize it for your needs, like making a custom-tailored suit instead of buying one off the rack.
+
+### Where to get the Kernel
+You can download the latest Linux kernel from the official website or repositories, much like downloading the latest version of an app from the app store.
+
+### Upstream and Downstream Kernels
+Upstream kernels are the original versions released by the kernel developers, while downstream kernels are versions that have been customized by others, like a chef's recipe that you
