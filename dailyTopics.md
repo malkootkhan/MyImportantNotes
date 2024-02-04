@@ -1,6 +1,7 @@
 # These are daily topics to be explored every weekend
 
 ## 1. Instrument Cluster
+In the automotive industry, the term "cluster" most commonly refers to the instrument cluster. This is the display area located on a car's dashboard directly in front of the driver, which contains the collection of instruments and indicators that provide crucial information about the car's status. Here's what it typically includes:
 **Speedometer:** Displays vehicle speed.
 **Tachometer:** Shows engine RPM.
 **Fuel Gauge:** Indicates fuel level.
@@ -9,6 +10,7 @@
 **Trip Computer:** Provides trip information like distance, fuel consumption.
 **Warning Lights/Indicators:** Alert the driver to various issues or active systems.
 
+---
 ## 2. Infotainment System
 **Central Display:** Touchscreen for navigation, media, and settings.
 **Audio System:** Radio, music streaming, USB or Bluetooth connectivity.
