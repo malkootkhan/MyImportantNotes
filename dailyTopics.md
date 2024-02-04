@@ -9,8 +9,8 @@ In the automotive industry, the term "cluster" most commonly refers to the instr
 **Temperature Gauge:** Monitors engine coolant temperature.  
 **Odometer:** Tracks total distance traveled by the vehicle.  
 **Trip Computer:** Provides trip information like distance, fuel consumption.  
-**Warning Lights/Indicators:** Alert the driver to various issues or active systems.  
-
+**Warning Lights/Indicators:** Alert the driver to various issues or active systems.    
+![Cluster](./cluster.png)  
 ---
 ## 2. Infotainment System  
 **Central Display:** Touchscreen for navigation, media, and settings.  
