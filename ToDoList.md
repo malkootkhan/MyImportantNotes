@@ -141,8 +141,10 @@ In essence, data structures provide the necessary framework for organizing, mana
 - [ ] Per-CPU Variables
 ## Memory Management
 ### Virtual Memory
+
 virtual memory is an important concept in linux kernel. virtual memory addresses are mapped to the physical RAM and also mapped to other hardware devices PCI GPU and so on
 Virtual memory is used on software side and give separate spaces for each process indepandtly. MMU has a role in implementing virtual memory
+
 ![virtual memory](./virtualMemory.png)
 
 - Paging
