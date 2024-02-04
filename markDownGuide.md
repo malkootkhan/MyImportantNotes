@@ -90,4 +90,15 @@ to create table
 |--|--|
 |title|heading|
 
+to go to new line always give one two spaces at the end of line like in the following case, the first have no space and the second has space ate the end
+first:
+a
+b
+b
+second:
+a 
+b 
+c 
+
+
 
