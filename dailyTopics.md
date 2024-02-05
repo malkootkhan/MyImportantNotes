@@ -56,6 +56,7 @@ In the automotive industry, the term "cluster" most commonly refers to the instr
 **Telematics:** Systems for GPS tracking, emergency services, and remote diagnostics.  
 **Wireless Modules:** Bluetooth, Wi-Fi, and cellular connections for in-car connectivity.  
 
+- XEN hypervisor and its interaction with kernel
 - clamps
 - vfs
 - virtual memory
