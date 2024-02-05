@@ -56,6 +56,14 @@ In the automotive industry, the term "cluster" most commonly refers to the instr
 **Telematics:** Systems for GPS tracking, emergency services, and remote diagnostics.  
 **Wireless Modules:** Bluetooth, Wi-Fi, and cellular connections for in-car connectivity.  
 
+## GOOD BOOKS FOR READING:
+The following resources have further information on the topics introduced in this chapter:  
+- Linux Kernel Development, 3rd Edition, by Robert Love  
+- Linux System Programming, 2nd Edition, by Robert Love  
+- Understanding the Linux VM Manager by Mel Gorman: https://www.kernel.  
+org/doc/gorman/pdf/understand.pdf  
+- Valgrind 3.3 - Advanced Debugging and Profiling for Gnu/Linux Applications by J Seward, N. Nethercote, and J. Weidendorfer   
+
 - KVM
 - XEN hypervisor and its interaction with kernel
 - clamps
