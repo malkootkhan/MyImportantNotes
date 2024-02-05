@@ -64,6 +64,11 @@ The following resources have further information on the topics introduced in thi
 org/doc/gorman/pdf/understand.pdf  
 - Valgrind 3.3 - Advanced Debugging and Profiling for Gnu/Linux Applications by J Seward, N. Nethercote, and J. Weidendorfer   
 
+---
+- memory sections .text .data .bss etc RAM/FLASH
+- ftrace
+- strace
+- corefile
 - KVM
 - XEN hypervisor and its interaction with kernel
 - clamps
