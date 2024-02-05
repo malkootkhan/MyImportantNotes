@@ -227,3 +227,5 @@ You can download the latest Linux kernel from the official website or repositori
 
 ### Upstream and Downstream Kernels
 Upstream kernels are the original versions released by the kernel developers, while downstream kernels are versions that have been customized by others, like a chef's recipe that you
+
+- XEN hypervisor and its interaction with kernel ?
