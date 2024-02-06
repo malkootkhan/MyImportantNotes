@@ -66,7 +66,7 @@ org/doc/gorman/pdf/understand.pdf
 
 ---
 - vehicle ignition, starting, electronic system working when not working all these concepts should be cleared
-- memory sections .text .data .bss etc RAM/FLASH
+- memory sections .text .data .bss etc RAM/FLASH (for this the ucour from kirls is the best)
 - ftrace
 - strace
 - corefile
