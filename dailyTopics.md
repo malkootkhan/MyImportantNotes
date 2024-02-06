@@ -65,6 +65,7 @@ org/doc/gorman/pdf/understand.pdf
 - Valgrind 3.3 - Advanced Debugging and Profiling for Gnu/Linux Applications by J Seward, N. Nethercote, and J. Weidendorfer   
 
 ---
+- vehicle ignition, starting, electronic system working when not working all these concepts should be cleared
 - memory sections .text .data .bss etc RAM/FLASH
 - ftrace
 - strace
@@ -74,5 +75,5 @@ org/doc/gorman/pdf/understand.pdf
 - clamps
 - vfs
 - virtual memory
-- cal trace, call stack
+- call trace, call stack
 - phony target in Makefile
