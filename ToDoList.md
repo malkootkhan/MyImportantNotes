@@ -22,7 +22,7 @@
 The kernel talks to driver and the driver talks to hardware directly  
 Drivers are of two types:  
 - **character drivers:** character driver deals with the plain text or characters data  
-- **block drivers:** it deals block of data that which can be video or other heavy data  
+- **block drivers:** it deals block of data such as interacting hard drive which organizes data in blocks
 
 - [ ] **File Systems:** It provides a file system infrastructure that allows for data storage, access, and management. The kernel supports multiple file systems, enabling it to work with various storage devices and protocols. It handles operations like reading, writing, creating, and deleting files and directories.  
 Files also provide a way between kernel and user space to interact using read/write or other syscall. eveything in linux treated as file  
