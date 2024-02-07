@@ -219,7 +219,8 @@ default m means when you open the menuconfig gui it will selected is dynamic loa
 6. add `obj-<CONFIG_ITEM>+=<module>.o`
 7. add the local level Makefile to upper level Makefile
 **NOTE:**linux kernel has Kbuild system in my case I created the directory in main linux dir where I have to add my directory to the upper Kbuild which resolved the issue
-
+> **inode:** inode (index node) is a structure that holds metadata **metadata** is the information about the file data itself like which time it is created who created what size and all
+ 
 # CROSS COMPILATION OF LINUX KERNEL:
 
 ## cross tool-chain installation and settings for linux host
