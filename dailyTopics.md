@@ -65,6 +65,7 @@ org/doc/gorman/pdf/understand.pdf
 - Valgrind 3.3 - Advanced Debugging and Profiling for Gnu/Linux Applications by J Seward, N. Nethercote, and J. Weidendorfer   
 
 ---
+- step through linux kernel source (there is some way to run linux kernel in userspace as other program and understand the flow)
 - vehicle ignition, starting, electronic system working when not working all these concepts should be cleared
 - memory sections .text .data .bss etc RAM/FLASH (for this the ucour from kirls is the best)
 - ftrace
