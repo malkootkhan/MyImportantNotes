@@ -74,7 +74,7 @@ when two persons have the same one bank account and have $100 in it and one pers
 when two or more threads wait for one another to release the resource for infinite time.
 more clearly->when one thread gets a lock starts to execute and resource which already lock by other thread and that other inside the resource spining for the resource which is already lock by the first thread so they hung up in infinite loop and we can say deadlock occured 
 
-|Thread_1  |      |
+|Thread_1  |      |Thread_2
 |--|--|
 |lock(resource_1)  |lock(resource_2)|
 |....              |.....
