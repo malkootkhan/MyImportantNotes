@@ -65,7 +65,9 @@ org/doc/gorman/pdf/understand.pdf
 - Valgrind 3.3 - Advanced Debugging and Profiling for Gnu/Linux Applications by J Seward, N. Nethercote, and J. Weidendorfer   
 
 ---
-- deadlock vs race condition
+## deadlock vs race condition   
+when two processes access the same resource at once the resulting output is always wrong and this is called **race codition** and to avoid race condition we use locking mechanism which serializes the access in a way one after other or synchronizes the execution but some time it leads to **deadlock** and it is a condition in which two processes waiting/spinning for each other to release the lock and acquire that lock 
+
 - spinlock and semaphore and daemons etc
 - step through linux kernel source (there is some way to run linux kernel in userspace as other program and understand the flow)
 - vehicle ignition, starting, electronic system working when not working all these concepts should be cleared
