@@ -82,7 +82,8 @@ more clearly->when one thread gets a lock starts to execute and resource which a
 |lock(resource_2)|lock(resource_1)|
 |....            |...|
 |....            |...|
-|unlock(resource_1)|unlock(resource_2)|
+|unlock(resource_1)|unlock(resource_2)|   
+
 now these two are depending on each other and waiting for each other to release the resource
 
 - spinlock and semaphore and daemons etc
