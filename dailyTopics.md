@@ -66,7 +66,24 @@ org/doc/gorman/pdf/understand.pdf
 
 ---
 ## deadlock vs race condition   
-when two processes access the same resource at once the resulting output is always wrong and this is called **race codition** and to avoid race condition we use locking mechanism which serializes the access in a way one after other or synchronizes the execution but some time it leads to **deadlock** and it is a condition in which two processes waiting/spinning for each other to release the lock and acquire that lock 
+when two processes access the same resource at once the resulting output is always wrong and this is called **race condition** and to avoid race condition we use locking mechanism which serializes the access in a way one after other or synchronizes the execution but some time it leads to **deadlock** and it is a condition in which two processes waiting/spinning for each other to release the lock and acquire that lock 
+
+### Race Condition Example:    
+when two persons have the same one bank account and have $100 in it and one person withdraw $10 and the other withdraw $50 exactly at same time then the remaining money in the account will be either $90 or $50 which both are not correct remaining amounts   
+### Deadlock Example:     
+when two or more threads wait for one another to release the resource for infinite time.
+more clearly->when one thread gets a lock starts to execute and resource which already lock by other thread and that other inside the resource spining for the resource which is already lock by the first thread so they hung up in infinite loop and we can say deadlock occured 
+
+|Thread_1  |      |
+|--|--|
+|lock(resource_1)  |lock(resource_2)|
+|....              |.....
+|...               |..... 
+|lock(resource_2)  |lock(resource_1)|
+|....              |....
+|....              |...
+|unlock(resource_1)|unlock(resource_2)
+now these two are depending on each other and waiting for each other to release the resource
 
 - spinlock and semaphore and daemons etc
 - step through linux kernel source (there is some way to run linux kernel in userspace as other program and understand the flow)
