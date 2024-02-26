@@ -9,16 +9,19 @@ so in short It is the most important docs will be always be updated with any typ
 - [x] started on date: 27/12/2023   
 - [x] Author: Malkoot Khan   
 - [x] Description: The goal is to store and update here whatever new learning done. when all the important knowledge and pin-points are available in one place so it will be easier to get start where I left and memorize the things easily if there is a long break in any of the topic so after that much time I can easily pick where left.   
+
 ---   
 
 **Getstarted to know the linux kernel:**    
 - [I got some good knowledge from the link](https://www.youtube.com/watch?v=QatE61Ynwrw)    
 **The key points:**   
+
 ---    
 ### linux test project(LTP):   
 This is a tool for testing the linux kernel it is open-source and its source code is available on github    
 This is an important tool to use for testing after whatever changes made to the kernel but I think mostly used by the kernel maintainers   
 (It is somehow user level application but should be explored to confirm)   
+
 ---   
 
 ### Linux Kernel Selftests(kselftests):   
@@ -33,6 +36,7 @@ there are some tools that are used to check the memory and memory leaks : scuch 
 **config flags:**  
 this file resides in the main kernel directory as ".config" and contains the various configurations flags. if we want to debug the kernel then first we have to enable debug flag in this file such as    
 CONFIG_GDB_SCRIPTS=y    
+
 ---   
 
 ### ftrace(function trace):    
@@ -58,6 +62,7 @@ function+offset=function-name+0x34
 - virtual memory?   
 - kdump?   
 - scripts dir in kernel source?    
+
 ---    
 
 # QEMU RELATED STUFFS:    
@@ -68,6 +73,7 @@ Follow the following steps to run qemu
 **GDB:** if we want to run gdb on kernel then run the following commands   
 > `sudo qemu-system-arm -M virt -kernel "$zImage_path" -initrd ~/qemu/rootfs.cpio -s -S -append "console=ttyS0 nokaslr" -append "root=/dev/ram rdinit=/sbin/init" -nographic`   
 but the debug flag should be enabled as explained earlier    
+
 ---   
 running this gdb command in one terminal and in another terminal we have run `arm-linux-gnueabihf-gdb vmlinux` then `target remote :1234` and then some commands to boot in debug mode and explore   
 - [gdb debugging guide](https://www.youtube.com/watch?v=bxKMW9wtAH0)   
@@ -81,7 +87,6 @@ running this gdb command in one terminal and in another terminal we have run `ar
 - fix the problem   
 
 ---   
-
 ## KGDB for real target:    
 kgdb is used when target is connected serially to host system; for doing kgdb debugging we have to prepare the following     
 
@@ -96,8 +101,8 @@ kgdb is used when target is connected serially to host system; for doing kgdb de
 - "gdb path/to/vmlinux"   
 - "(gdb) target remote /dev/ttyS0"   
 - once connected then gdb cmmands can used to debug   
----  
 
+---  
 # KGDB with qemu:    
 ## prepare qemu target:     
 - compile the kernel with debug flag enabled:- > "CONFIG_DEBUG_INFO=y" it can be done either by menuconfig or directly in ".config" file
@@ -108,6 +113,7 @@ kgdb is used when target is connected serially to host system; for doing kgdb de
 - (gdb) target remote :1234  
 [guidance link](https://www.youtube.com/watch?v=2VcA5Wj7IvU)  
 you can explore various gdb commands to step in throguh source code layout or assembly and many more things   
+
 ---    
 # CREATING PATCH FOR LINUX KERNEL:   
 here I am interested in contributing to linux kernel main repo but for that I must know how to find where to add modify the code then create a standard patch and standard way to add that patch to the kernel   
@@ -139,42 +145,38 @@ git blame dir" It will show who wrote each and who review everything we can chec
 
 ---
 ## Linux study findings:
-- **task_struct** is the most important structure for holding almost everything related to processes: its object is also called 'process descriptor' or process descriptor means instance of task_struct
-- **PID** The concurrent processes that can run and that is repesented by short int 32768 and can be increased to max 4 millions specified '/proc/sys/kernel/pid_max' file:
-- init is the parent process for all other process init process is called by boot process init process has PID:1
-- every process has exactly one parent and zero or more children. the children having same parent are called siblings
-- all the process info exist in task_struct descriptor or instance it has a member called parent hold the parent id and a list of children
+- **task_struct** is the most important structure for holding almost everything related to processes: its object is also called 'process descriptor' or process descriptor means instance of task_struct   
+- **PID** The concurrent processes that can run and that is repesented by short int 32768 and can be increased to max 4 millions  specified '/proc/sys/kernel/pid_max' file:    
+- init is the parent process for all other process init process is called by boot process init process has PID:1   
+- every process has exactly one parent and zero or more children. the children having same parent are called siblings  
+- all the process info exist in task_struct descriptor or instance it has a member called parent hold the parent id and a list of children  
 - modinfo/objdump KernelModule.ko : will give you information related to the module  
 
+---  
+# Intree kernel moduledevelopment   
+1. create a directory anywhere in linux kernel source code base   
+2. write your module let suppose, main.c   
+3. create Kconfig: this file add your module to kernel config menu where you can select or deselect before building the kernel   
 
-
-
-# Intree kernel moduledevelopment
-1. create a directory anywhere in linux kernel source code base
-2. write your module let suppose, main.c
-3. create Kconfig: this file add your module to kernel config menu where you can select or deselect before building the kernel
-
-**Basic syntax**
-
-```
+**Basic syntax**  
+```   
 menu "my custom module"
 	config CUSTOM_HELLOWORLD
 		tristate "hello world module support"
 		default m
 endmenu
-```
-where m,n,y are three states can be set for module y means statically load or already added and m mean load on run time and n means not add
+```  
+where m,n,y are three states can be set for module y means statically load or already added and m mean load on run time and n means not add  
+default m means when you open the menuconfig gui it will selected is dynamic loadable module but for it will selected as part kernel and n mean it will not be selected so if you want you have to select  
 
-default m means when you open the menuconfig gui it will selected is dynamic loadable module but for it will selected as part kernel and n mean it will not be selected so if you want you have to select
-
-4. add the local level Kconfig to the upper level Kconfig file
+4. add the local level Kconfig to the upper level Kconfig file   
 5. create a local Makefile
-6. add `obj-<CONFIG_ITEM>+=<module>.o`
-7. add the local level Makefile to upper level Makefile
-**NOTE:**linux kernel has Kbuild system in my case I created the directory in main linux dir where I have to add my directory to the upper Kbuild which resolved the issue
-> **inode:** inode (index node) is a structure that holds metadata **metadata** is the information about the file data itself like which time it is created who created what size and all
-> x << y = x*2^y: these two side are equal either shift left or multiply
-> x >> y = x/2^y: the same is but opposite in direction
+6. add `obj-<CONFIG_ITEM>+=<module>.o`   
+7. add the local level Makefile to upper level Makefile   
+**NOTE:**linux kernel has Kbuild system in my case I created the directory in main linux dir where I have to add my directory to the upper Kbuild which resolved the issue   
+> **inode:** inode (index node) is a structure that holds metadata **metadata** is the information about the file data itself like which time it is created who created what size and all    
+> x << y = x*2^y: these two side are equal either shift left or multiply   
+> x >> y = x/2^y: the same is but opposite in direction   
 
 # CROSS COMPILATION OF LINUX KERNEL:
 
