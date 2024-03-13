@@ -215,16 +215,18 @@ For example, task_struct may contain a structure for scheduling information, ano
 ### Linked Lists within task_struct:   
 One of the fields within task_struct is typically a pointer or a set of pointers used for linking it to other task_structs in a list. This is often implemented using a specific type of linked list provided by the Linux kernel, called a "doubly linked list" (since each node has links to both the previous and next nodes). In the kernel, this is managed with the list_head structure, which contains pointers to the next and previous elements in the list.     
 
-Here’s a simplified example:    
-struct task_struct {   
-    // Other members...   
-    struct list_head tasks; // This is used to link this task_struct to others   
-    // More members...    
-};     
+Here’s a simplified example:
+```
+struct task_struct {     
+    // Other members...     
+    struct list_head tasks; // This is used to link this task_struct to others     
+    // More members...      
+};       
+```
 In the actual kernel code, task_struct instances are linked together using the tasks field. This allows the kernel to keep track of all processes in a system-wide list. For example, when a new process is created, a new task_struct is allocated and added to this list.   
 
 ### Its Implementation:   
-Break it Down: Start by understanding the individual components of task_struct. Look at each field and understand its purpose. Ignore the fields that are not immediately necessary for your understanding; focus on the main ones like process state, parent/child links, and the linked list pointers.
+**Break it Down:** Start by understanding the individual components of task_struct. Look at each field and understand its purpose. Ignore the fields that are not immediately necessary for your understanding; focus on the main ones like process state, parent/child links, and the linked list pointers.
 
 - Follow the Links: Pay special attention to fields like list_head. Try to understand how they link one task_struct to another. Look at functions that manipulate these links, such as adding a new process or removing one.
 
